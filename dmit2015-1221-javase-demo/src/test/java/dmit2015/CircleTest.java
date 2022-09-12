@@ -1,5 +1,6 @@
 package dmit2015;
 
+import dmit2015.javabean.Circle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

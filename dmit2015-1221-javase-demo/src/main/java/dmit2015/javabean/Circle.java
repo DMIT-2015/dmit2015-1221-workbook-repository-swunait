@@ -1,4 +1,4 @@
-package dmit2015;
+package dmit2015.javabean;
 
 public class Circle {
 

@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="dmit2015-1221-javase-demo-1.0-SNAPSHOT.war">
+    <root id="archive" name="dmit2015-1221-javase-demo.war">
       <element id="artifact" artifact-name="dmit2015-1221-javase-demo:war exploded" />
     </root>
   </artifact>
