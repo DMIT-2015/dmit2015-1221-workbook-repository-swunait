@@ -1,49 +1,25 @@
 package dmit2015.javabean;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * This class is use to calculate a person's body mass index (BMI) and their BMI Category.
  *
  * @author Sam Wu
  * @version 2022.09.12
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BodyMassIndex {
 
     private String name;
     private double weight;
     private double height;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public BodyMassIndex(String name, double weight, double height) {
-        this.name = name;
-        this.weight = weight;
-        this.height = height;
-    }
-
-    public BodyMassIndex() {
-    }
 
     /**
      * Calculate the body mass index (BMI) using the weight and height of the person.
@@ -52,7 +28,9 @@ public class BodyMassIndex {
      * @return the body mass index (BMI) value of the person
      */
     public double bmi() {
-        return 703 * weight / (height * height);
+        double bmiValue = 703 * weight / (height * height);
+        bmiValue = Math.round(bmiValue * 10) / 10.0;
+        return bmiValue;
     }
 
     /**
