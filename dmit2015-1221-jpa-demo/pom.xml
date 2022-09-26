@@ -34,6 +34,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.1.3.Final</version>
         </dependency>
+        <!-- https://in.relation.to/2016/09/15/integration-tests-and-java-8-lambdas/-->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-testing</artifactId>
+            <version>6.1.3.Final</version>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
