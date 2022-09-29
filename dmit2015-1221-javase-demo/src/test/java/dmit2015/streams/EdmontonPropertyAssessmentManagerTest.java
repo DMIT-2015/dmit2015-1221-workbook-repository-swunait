@@ -20,13 +20,15 @@ class EdmontonPropertyAssessmentManagerTest {
 
     @Test
     void getPropertyAssessments() {
-        EdmontonPropertyAssessmentManager dataManager = new EdmontonPropertyAssessmentManager();
-        assertEquals(416_014, dataManager.getPropertyAssessments().size());
+//        EdmontonPropertyAssessmentManager dataManager = new EdmontonPropertyAssessmentManager();
+        EdmontonPropertyAssessmentManager dataManager = EdmontonPropertyAssessmentManager.getInstance();
+        assertEquals(416_014, dataManager.count());
     }
 
     @Test
     void getWards() {
-        EdmontonPropertyAssessmentManager dataManager = new EdmontonPropertyAssessmentManager();
+//        EdmontonPropertyAssessmentManager dataManager = new EdmontonPropertyAssessmentManager();
+        EdmontonPropertyAssessmentManager dataManager = EdmontonPropertyAssessmentManager.getInstance();
         List<String> wards = dataManager.wards();
         // There should be 12 wards in Edmonton
         assertEquals(12, wards.size());

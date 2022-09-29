@@ -698,7 +698,7 @@ public class StreamAPIDemo {
 
         gameList.stream()
                 .filter(currentGame -> currentGame.getPrice() > 19.99 && currentGame.getPrice() <= 30);
-                
+
 //        demoProcessingObjects();
 
 //        writeVideoGameListToCsvFile();

@@ -11,23 +11,36 @@ import java.util.stream.Stream;
 
 public class EdmontonPropertyAssessmentManager {
 
-    @Getter
-    private List<EdmontonPropertyAssessment> propertyAssessments;
+    private static EdmontonPropertyAssessmentManager INSTANCE;
 
-    public EdmontonPropertyAssessmentManager() {
+    private EdmontonPropertyAssessmentManager() {
         try {
             Path csvPath = Path.of("/home/user2015/Downloads/Property_Assessment_Data__Current_Calendar_Year_.csv");
-            Stream<String> linesStream = Files.lines(csvPath);
-            propertyAssessments = linesStream
-                    .skip(1)
-                    .map(line -> EdmontonPropertyAssessment.parseCsv(line).orElse(null))
-                    .filter(Objects::nonNull)
-                    .toList();
+            try ( Stream<String> linesStream = Files.lines(csvPath) ) {
+                propertyAssessments = linesStream
+                        .skip(1)
+                        .map(line -> EdmontonPropertyAssessment.parseCsv(line).orElse(null))
+                        .filter(Objects::nonNull)
+                        .toList();
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
             propertyAssessments = new ArrayList<>();
         }
+    }
+
+    public static EdmontonPropertyAssessmentManager getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new EdmontonPropertyAssessmentManager();
+        }
+        return INSTANCE;
+    }
+
+    private List<EdmontonPropertyAssessment> propertyAssessments;
+
+    public int count() {
+        return propertyAssessments.size();
     }
 
     /**
