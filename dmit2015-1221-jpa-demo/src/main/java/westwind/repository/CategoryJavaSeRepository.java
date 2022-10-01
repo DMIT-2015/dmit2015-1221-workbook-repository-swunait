@@ -14,7 +14,7 @@ public class CategoryJavaSeRepository {
 
     public CategoryJavaSeRepository() {
         // https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html#obtaining-an-entity-manager-factory-in-a-java-se-environment
-        _emf = Persistence.createEntityManagerFactory("local-mssql-dmit2015-jpa-pu");
+        _emf = Persistence.createEntityManagerFactory("local-mssql-westwind-jpa-pu");
     }
 
     public EntityManagerFactory entityManagerFactory() {

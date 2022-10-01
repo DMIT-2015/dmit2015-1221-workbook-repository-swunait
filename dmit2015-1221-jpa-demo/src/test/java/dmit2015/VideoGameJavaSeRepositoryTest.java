@@ -47,7 +47,7 @@ class VideoGameJavaSeRepositoryTest {
 
     @AfterEach
     void tearDown() {
-//        _gameRepository.deleteAll();
+        _gameRepository.deleteAll();
     }
 
     @Test

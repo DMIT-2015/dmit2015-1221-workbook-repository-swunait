@@ -15,8 +15,8 @@ public class VideoGameJavaSeRepository {
 
     public VideoGameJavaSeRepository() {
         // https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html#obtaining-an-entity-manager-factory-in-a-java-se-environment
-        _emf = Persistence.createEntityManagerFactory("h2database-jpa-pu");
-//        _emf = Persistence.createEntityManagerFactory("local-mssql-dmit2015-jpa-pu");
+//        _emf = Persistence.createEntityManagerFactory("h2database-jpa-pu");
+        _emf = Persistence.createEntityManagerFactory("local-mssql-dmit2015-jpa-pu");
     }
 
     public VideoGame create(VideoGame newVideoGame) {

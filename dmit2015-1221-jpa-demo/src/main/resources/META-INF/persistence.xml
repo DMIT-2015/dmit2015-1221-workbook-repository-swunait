@@ -27,6 +27,21 @@
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=DMIT2015_1221_CourseDB;TrustServerCertificate=true" />
+            <property name="jakarta.persistence.jdbc.user" value="user2015" />
+            <property name="jakarta.persistence.jdbc.password" value="Password2015" />
+
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="local-mssql-westwind-jpa-pu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
 
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
