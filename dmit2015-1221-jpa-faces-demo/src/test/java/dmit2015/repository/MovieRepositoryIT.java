@@ -1,9 +1,8 @@
-package ca.nait.dmit.repository;
+package dmit2015.repository;
 
-import ca.nait.dmit.entity.Movie;
+import dmit2015.entity.Movie;
 import ca.nait.dmit.listener.MovieApplicationStartupListener;
 import common.config.ApplicationConfig;
-
 import jakarta.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;

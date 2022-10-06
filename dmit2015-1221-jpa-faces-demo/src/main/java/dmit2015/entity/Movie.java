@@ -1,4 +1,4 @@
-package ca.nait.dmit.entity;
+package dmit2015.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

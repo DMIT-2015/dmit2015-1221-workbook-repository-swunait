@@ -93,6 +93,12 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA)
            JPA from JUnit/TestNG -->
@@ -141,6 +147,57 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- For IntelliJ IDEA Code Completion to detect project is using Jakarta Faces -->
+        <dependency>
+            <groupId>jakarta.faces</groupId>
+            <artifactId>jakarta.faces-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>12.0.0-RC3</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>primeflex</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>4.0-M17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>selenium-jupiter</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -159,13 +216,13 @@
                 <artifactId>wildfly-jar-maven-plugin</artifactId>
                 <version>8.0.0.Final</version>
                 <configuration>
-                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#27.0.0.Alpha5</feature-pack-location>
+                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#27.0.0.Beta1</feature-pack-location>
                     <!--                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)</feature-pack-location>-->
                     <layers>
                         <!-- https://docs.wildfly.org/26/Bootable_Guide.html#wildfly_layers -->
-                        <layer>jax-server</layer>
-                        <layer>management</layer>
+                        <layer>jpa</layer>
                         <layer>jsf</layer>
+                        <layer>h2-driver</layer>
                     </layers>
                     <excluded-layers>
                         <layer>deployment-scanner</layer>
@@ -209,6 +266,8 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M7</version>
             </plugin>
+
+
 
         </plugins>
     </build>
