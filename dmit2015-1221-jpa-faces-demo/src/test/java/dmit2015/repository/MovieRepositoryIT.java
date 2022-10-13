@@ -16,6 +16,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -193,5 +195,16 @@ public class MovieRepositoryIT {
         assertTrue(optionalMovie.isEmpty());
 
         _beanManagedTransaction.rollback();
+    }
+
+    @Order(6)
+    @ParameterizedTest
+    @CsvSource({
+            "busters, 2",
+            "Marvel, 0"
+    })
+    void findByPartialTitle(String partialTitle, int expectedCount) {
+        List<Movie> queryResultList = _movieRepository.findByPartialTitle(partialTitle);
+        assertEquals(expectedCount, queryResultList.size());
     }
 }

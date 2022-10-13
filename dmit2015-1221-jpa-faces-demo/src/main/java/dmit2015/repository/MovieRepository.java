@@ -88,4 +88,15 @@ public class MovieRepository {
         em.createQuery("DELETE FROM Movie").executeUpdate();
     }
 
+    public List<Movie> findByPartialTitle(String partialTitle) {
+        List<Movie> queryResultList = em.createQuery("""
+            SELECT m 
+            FROM Movie m
+            WHERE m.title LIKE :titleValue
+            """, Movie.class)
+                .setParameter("titleValue", "%" + partialTitle + "%")
+                .getResultList();
+        return queryResultList;
+    }
+
 }
