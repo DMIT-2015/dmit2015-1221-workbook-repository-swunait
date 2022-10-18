@@ -1,0 +1,103 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Student - List"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Student List</h1>
+
+        <p:messages id="messages"/>
+
+        <p:commandButton value="Create New"
+                         action="create"
+                         icon="pi pi-database"
+        >
+        </p:commandButton>
+
+        <h:form>
+            <p:focus for="searchString" />
+
+            <div class="formgroup-inline">
+                <div class="field">
+                    <label for="searchString">Find by name:</label>
+                    <p:inputText id="searchString"
+                                 value="#{currentStudentListController.currentFilter}"
+                    />
+                </div>
+                <div class="field">
+                    <p:commandButton value="Search"
+                                     action="#{currentStudentListController.doSearch()}"
+                                     icon="pi pi-search"
+                                     update="entityTable :messages"
+                    >
+                    </p:commandButton>
+                    |
+                    <p:link id="backToListLink" outcome="index" value="Back to full List">
+                    </p:link>
+                </div>
+            </div>
+
+
+            <p:dataTable id="entityTable"
+                         value="#{currentStudentListController.studentList}"
+                         var="currentItem"
+                         paginator="true"
+                         rows="10"
+            >
+
+                <p:column headerText="Last Name" sortBy="#{currentItem.lastName}">
+                    <h:outputText value="#{currentItem.lastName}"/>
+                </p:column>
+
+                <p:column headerText="First Name">
+                    <h:outputText value="#{currentItem.firstName}"/>
+                </p:column>
+
+                <p:column headerText="Enrollment Date" sortBy="#{currentItem.enrollmentDate}">
+                    <h:outputText value="#{currentItem.enrollmentDate}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Action">
+
+                    <p:link id="editLink" outcome="edit" value="edit">
+                        <f:param name="editId" value="#{currentItem.id}"/>
+                    </p:link>
+
+                    |
+
+                    <p:link id="detailsLink" outcome="details" value="details">
+                        <f:param name="editId" value="#{currentItem.id}"/>
+                    </p:link>
+
+                    |
+
+                    <p:link id="deleteLink" outcome="delete" value="delete">
+                        <f:param name="editId" value="#{currentItem.id}"/>
+                    </p:link>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

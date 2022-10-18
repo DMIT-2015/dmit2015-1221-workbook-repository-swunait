@@ -1,0 +1,80 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="edit - Edit"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Edit edit</h1>
+
+        <p:messages id="messages"/>
+
+        <h:form prependId="false">
+
+            <p:panel header="edit Details">
+                <div class="field">
+                    <label for="lastName">Last Name</label>
+                    <p:inputText
+                            id="lastName"
+                            type="text"
+                            class="inputfield w-full"
+                            value="#{currentStudentEditController.existingStudent.lastName}">
+                    </p:inputText>
+                </div>
+
+                <div class="field">
+                    <label for="firstName">First Name</label>
+                    <p:inputText
+                            id="firstName"
+                            type="text"
+                            class="inputfield w-full"
+                            value="#{currentStudentEditController.existingStudent.firstName}">
+                    </p:inputText>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="enrollmentDate">Enrollement Date</label>
+                    <p:datePicker
+                            id="enrollmentDate"
+                            pattern="yyyy-MM-dd"
+                            showIcon="true"
+                            showButtonBar="true"
+                            class="inputfield w-full"
+                            value="#{currentStudentEditController.existingStudent.enrollmentDate}">
+                    </p:datePicker>
+                </div>
+
+                <p:commandButton
+                        id="updateButton"
+                        value="Save"
+                        icon="pi pi-save"
+                        action="#{currentStudentEditController.onUpdate()}"
+                        update=":messages @form"/>
+
+
+            </p:panel>
+
+            <p>
+                <p:link id="backToListLink" outcome="index" value="Back to List">
+                </p:link>
+            </p>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

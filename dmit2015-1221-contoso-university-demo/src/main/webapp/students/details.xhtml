@@ -1,0 +1,69 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Student Details"/>
+
+    <ui:define name="maincontent">
+
+        <p:panel header="Student Details">
+            <p:panelGrid columns="2">
+                <h:panelGroup>
+                    <strong><h:outputText value="Last Name"/></strong>
+                </h:panelGroup>
+                <h:outputText value="#{currentStudentDetailsController.existingStudent.lastName}"/>
+
+                <h:panelGroup>
+                    <strong><h:outputText value="First Name"/></strong>
+                </h:panelGroup>
+                <h:outputText value="#{currentStudentDetailsController.existingStudent.firstName}"/>
+
+                <h:panelGroup>
+                    <strong><h:outputText value="Enrollment Date"/></strong>
+                </h:panelGroup>
+                <h:outputText value="#{currentStudentDetailsController.existingStudent.enrollmentDate}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                </h:outputText>
+
+                <h:panelGroup>
+                    <strong><h:outputText value="Enrollments"/></strong>
+                </h:panelGroup>
+                <p:dataTable id="enrollments"
+                             value="#{currentStudentDetailsController.fetchEnrollments()}"
+                             var="currentEnrollment">
+                    <p:column headerText="Course Title">
+                        <h:outputText value="#{currentEnrollment.course.title}" />
+                    </p:column>
+
+                    <p:column headerText="Grade">
+                        <h:outputText value="#{currentEnrollment.grade}" />
+                    </p:column>
+                </p:dataTable>
+
+            </p:panelGrid>
+
+        </p:panel>
+
+        <p:link id="editLink" outcome="edit" icon="pi pi-user-edit" value="edit">
+            <f:param name="editId" value="#{currentStudentDetailsController.editId}"/>
+        </p:link>
+        |
+        <p:link id="backToListLink" outcome="index" value="Back to List">
+        </p:link>
+
+    </ui:define>
+
+</ui:composition>

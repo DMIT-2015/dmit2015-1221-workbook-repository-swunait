@@ -1,6 +1,5 @@
 package ca.nait.dmit.view;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +15,7 @@ import java.time.Duration;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -28,7 +27,7 @@ public class MovieCrudSeleniumIT {
 
     @BeforeAll
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().setup();
 
         // https://www.omgubuntu.co.uk/2022/04/how-to-install-firefox-deb-apt-ubuntu-22-04
 //        WebDriverManager.firefoxdriver().setup();
