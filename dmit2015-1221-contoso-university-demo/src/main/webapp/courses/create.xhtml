@@ -1,0 +1,88 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Course - Create"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Create Course</h1>
+
+        <p:messages id="messages"/>
+
+        <h:form prependId="false">
+            <p:focus context="panel"/>
+
+            <p:panel id="panel" header="Course Details">
+                <div class="ui-fluid">
+                    <div class="field">
+                        <label for="courseId">courseId</label>
+                        <p:inputText
+                                id="courseId"
+                                type="text"
+                                value="#{currentCourseCreateController.newCourse.courseId}">
+                        </p:inputText>
+                    </div>
+
+                    <div class="field">
+                        <label for="title">Title</label>
+                        <p:inputText
+                                id="title"
+                                type="text"
+                                value="#{currentCourseCreateController.newCourse.title}">
+                        </p:inputText>
+                    </div>
+
+                    <div class="field">
+                        <label for="credits">Credits</label>
+                        <p:inputText
+                                id="credits"
+                                type="text"
+                                value="#{currentCourseCreateController.newCourse.credits}">
+                        </p:inputText>
+                    </div>
+
+                    <div class="field">
+                        <label for="credits">Credits</label>
+                        <p:selectOneMenu id="departmentId"
+                                         value="#{currentCourseCreateController.selectedDepartmentId}">
+                            <f:selectItem itemValue="#{null}" itemLabel="--- select a department ---" />
+                            <f:selectItems value="#{currentCourseCreateController.departmentSelectionMap}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                </div>
+
+                <p:commandButton
+                        id="createButton"
+                        value="Create"
+                        icon="pi pi-save"
+                        action="#{currentCourseCreateController.onCreateNew()}"
+                        update=":messages @form"
+                />
+
+            </p:panel>
+
+            <p>
+                <p:link id="backToListLink" outcome="index" value="Back to List">
+                </p:link>
+            </p>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

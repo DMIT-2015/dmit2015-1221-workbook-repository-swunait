@@ -1,0 +1,78 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Course - List"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Course List</h1>
+
+        <p:messages id="messages"/>
+
+        <h:form prependId="false">
+
+            <p:commandButton value="Create New"
+                             action="create"
+                             icon="pi pi-database"
+            >
+            </p:commandButton>
+
+            <p:dataTable id="entityTable"
+                         value="#{currentCourseListController.courseList}"
+                         var="currentItem">
+
+                <p:column headerText="CourseID">
+                    <h:outputText value="#{currentItem.courseId}"/>
+                </p:column>
+
+                <p:column headerText="Title">
+                    <h:outputText value="#{currentItem.title}"/>
+                </p:column>
+
+                <p:column headerText="Credits">
+                    <h:outputText value="#{currentItem.credits}"/>
+                </p:column>
+
+                <p:column headerText="Department">
+                    <h:outputText value="#{currentItem.department.name}"/>
+                </p:column>
+
+                <p:column headerText="Action">
+<!--                    <p:link id="editLink" outcome="edit" value="edit">-->
+<!--                        <f:param name="editId" value="#{currentItem.courseId}"/>-->
+<!--                    </p:link>-->
+
+<!--                    |-->
+
+<!--                    <p:link id="detailsLink" outcome="details" value="details">-->
+<!--                        <f:param name="editId" value="#{currentItem.courseId}"/>-->
+<!--                    </p:link>-->
+
+<!--                    |-->
+
+<!--                    <p:link id="deleteLink" outcome="delete" value="delete">-->
+<!--                        <f:param name="editId" value="#{currentItem.courseId}"/>-->
+<!--                    </p:link>-->
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
