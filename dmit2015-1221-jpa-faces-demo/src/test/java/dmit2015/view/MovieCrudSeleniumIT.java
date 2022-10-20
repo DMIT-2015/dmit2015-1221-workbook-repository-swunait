@@ -1,5 +1,6 @@
 package ca.nait.dmit.view;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -27,7 +28,7 @@ public class MovieCrudSeleniumIT {
 
     @BeforeAll
     static void setupClass() {
-//        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup();
 
         // https://www.omgubuntu.co.uk/2022/04/how-to-install-firefox-deb-apt-ubuntu-22-04
 //        WebDriverManager.firefoxdriver().setup();
@@ -229,6 +230,47 @@ public class MovieCrudSeleniumIT {
         var facesMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-info-summary")));
         assertEquals("Movie - List", driver.getTitle());
         assertThat(facesMessages.getText(), containsString("Delete was successful."));
+    }
+
+
+    @Order(6)
+    @ParameterizedTest
+    @CsvSource({
+            ",Action,G,9.14,2021-09-14",
+    })
+    void shouldCreateMovie_titleValidation(String title, String genre, String rating, String price, String releaseDate) {
+        // Open a browser and navigate the page to create a new movie
+        driver.get("http://localhost:8080/movies/create.xhtml");
+        assertEquals("Movie - Create", driver.getTitle());
+
+        // Assign form field input values
+        if (title != null) {
+            setValue("title",title);
+        }
+
+        setValue("genre",genre);
+        setValue("rating",rating);
+        setValue("price",price);
+        setValue("releaseDate_input",releaseDate);
+
+        // Maximize the browser window so we can see the data being inputted
+        driver.manage().window().maximize();
+        // Find the create button and click on it
+        driver.findElement(By.id("createButton")).click();
+
+        // Wait for 3 seconds and verify navigate has been redirected to the listing page
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        var facesMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-error-summary")));
+        // Verify the title of the page
+        assertEquals("Movie - Create", driver.getTitle());
+        // Verify the feedback message is displayed in the page
+//        String feedbackMessage = facesMessages.getText();
+//        assertThat(feedbackMessage, containsString("The field Title must be a string with a minimum length of 3 and a maximum length of 60."));
+
+        var elements = driver.findElements(By.className("ui-messages-error-summary"));
+        assertEquals(2, elements.size());
+        assertEquals("The field Title must be a string with a minimum length of 3 and a maximum length of 60.", elements.get(0).getText());
+        assertEquals("The Title field is required.", elements.get(1).getText());
     }
 
 }
