@@ -236,9 +236,9 @@ public class MovieCrudSeleniumIT {
     @Order(6)
     @ParameterizedTest
     @CsvSource({
-            ",Action,G,9.14,2021-09-14",
+            ",,,,",
     })
-    void shouldCreateMovie_titleValidation(String title, String genre, String rating, String price, String releaseDate) {
+    void crateMovie_shouldFail_validationErrors(String title, String genre, String rating, String price, String releaseDate) {
         // Open a browser and navigate the page to create a new movie
         driver.get("http://localhost:8080/movies/create.xhtml");
         assertEquals("Movie - Create", driver.getTitle());
@@ -247,11 +247,18 @@ public class MovieCrudSeleniumIT {
         if (title != null) {
             setValue("title",title);
         }
-
-        setValue("genre",genre);
-        setValue("rating",rating);
-        setValue("price",price);
-        setValue("releaseDate_input",releaseDate);
+        if (genre != null) {
+            setValue("genre",genre);
+        }
+        if (rating != null) {
+            setValue("rating",rating);
+        }
+        if (price != null) {
+            setValue("price",price);
+        }
+        if (releaseDate != null) {
+            setValue("releaseDate_input",releaseDate);
+        }
 
         // Maximize the browser window so we can see the data being inputted
         driver.manage().window().maximize();
@@ -267,10 +274,15 @@ public class MovieCrudSeleniumIT {
 //        String feedbackMessage = facesMessages.getText();
 //        assertThat(feedbackMessage, containsString("The field Title must be a string with a minimum length of 3 and a maximum length of 60."));
 
-        var elements = driver.findElements(By.className("ui-messages-error-summary"));
-        assertEquals(2, elements.size());
-        assertEquals("The field Title must be a string with a minimum length of 3 and a maximum length of 60.", elements.get(0).getText());
-        assertEquals("The Title field is required.", elements.get(1).getText());
+        var errorMessagesElements = driver.findElements(By.className("ui-messages-error-summary"));
+        assertEquals(7, errorMessagesElements.size());
+        assertEquals("The field Title must be a string with a minimum length of 3 and a maximum length of 60.", errorMessagesElements.get(0).getText());
+        assertEquals("The Title field is required.", errorMessagesElements.get(1).getText());
+        assertEquals("The field Genre must match the regular expression '^[A-Z]+[a-zA-Z\\s]*$'.", errorMessagesElements.get(2).getText());
+        assertEquals("The field Genre is required.", errorMessagesElements.get(3).getText());
+        assertEquals("The field Rating must match the regular expression '^[A-Z]+[a-zA-Z0-9\"\"'\\s-]*$'.", errorMessagesElements.get(4).getText());
+        assertEquals("The field Rating is required.", errorMessagesElements.get(5).getText());
+        assertEquals("The Release Date field is required", errorMessagesElements.get(6).getText());
     }
 
 }
