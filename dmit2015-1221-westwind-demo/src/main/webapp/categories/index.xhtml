@@ -1,0 +1,85 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Category - List"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Category List</h1>
+
+        <p:messages id="messages"/>
+
+        <h:form prependId="false">
+
+            <p:commandButton value="Create New"
+                             action="create"
+                             icon="pi pi-database"
+            >
+            </p:commandButton>
+
+            <p:dataTable id="entityTable"
+                         value="#{currentCategoryListController.categoryList}"
+                         var="currentItem">
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{currentItem.categoryId}"/>
+                </p:column>
+
+                <!-- TODO: add p:column for the properties of the entity to display -->
+                <p:column headerText="categoryName">
+                    <h:outputText value="#{currentItem.categoryName}"/>
+                </p:column>
+
+                <p:column headerText="description">
+                    <h:outputText value="#{currentItem.description}"/>
+                </p:column>
+
+                <p:column headerText="picture">
+                    <c:if test="#{not empty currentItem.picture}">
+                        <o:graphicImage value="#{currentItem.picture}" dataURI="true"/>
+                        <p:graphicImage value="#{currentItem.picture}" />
+                    </c:if>
+                    <c:if test="#{empty currentItem.picture}">
+                        No picture
+                    </c:if>
+                </p:column>
+
+                <p:column headerText="Action">
+<!--                    <p:link id="editLink" outcome="edit" value="edit">-->
+<!--                        <f:param name="editId" value="#{currentItem.categoryId}"/>-->
+<!--                    </p:link>-->
+
+<!--                    |-->
+
+<!--                    <p:link id="detailsLink" outcome="details" value="details">-->
+<!--                        <f:param name="editId" value="#{currentItem.categoryId}"/>-->
+<!--                    </p:link>-->
+
+<!--                    |-->
+
+<!--                    <p:link id="deleteLink" outcome="delete" value="delete">-->
+<!--                        <f:param name="editId" value="#{currentItem.categoryId}"/>-->
+<!--                    </p:link>-->
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

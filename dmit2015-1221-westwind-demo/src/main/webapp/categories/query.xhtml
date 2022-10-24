@@ -1,0 +1,69 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Default Title"/>
+
+    <ui:define name="maincontent">
+        <p:messages id="messages" />
+
+        <h:form>
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <p:outputLabel value="Category Name:" for="@next"/>
+                    <p:autoComplete id="acCategory"
+                                    value="#{currentCategoryQueryListController.querySearchValue}"
+                                    completeMethod="#{currentCategoryQueryListController.completeText}"
+                                    scrollHeight="250"/>
+                </div>
+                <p:commandButton value="Submit"
+                                 actionListener="#{currentCategoryQueryListController.onSearch()}"
+                                 update=":messages outputPanel"
+                />
+                <p:commandButton value="Clear"
+                                 actionListener="#{currentCategoryQueryListController.onClear()}"
+                                 update=":messages acCategory outputPanel" />
+            </div>
+
+            <p:outputPanel id="outputPanel">
+                <p:panel header="Category Details" rendered="#{not empty currentCategoryQueryListController.querySingleResult}">
+                    <p:panelGrid columns="2">
+                        <h:panelGroup>
+                            <strong><h:outputText value="ID"/></strong>
+                        </h:panelGroup>
+                        <h:outputText id="editId" value="#{currentCategoryQueryListController.querySingleResult.categoryId}"/>
+
+                        <h:panelGroup>
+                            <strong><h:outputText value="categoryName"/></strong>
+                        </h:panelGroup>
+                        <h:outputText id="categoryName" value="#{currentCategoryQueryListController.querySingleResult.categoryName}"/>
+
+                        <h:panelGroup>
+                            <strong><h:outputText value="description"/></strong>
+                        </h:panelGroup>
+                        <h:outputText id="description" value="#{currentCategoryQueryListController.querySingleResult.description}"/>
+
+                    </p:panelGrid>
+
+                </p:panel>
+
+            </p:outputPanel>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
