@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Products", schema = "WestWind", catalog = "DMIT2015_1221_A01_swuUser2015")
+@Table(name = "Products", schema = "WestWind")
 public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

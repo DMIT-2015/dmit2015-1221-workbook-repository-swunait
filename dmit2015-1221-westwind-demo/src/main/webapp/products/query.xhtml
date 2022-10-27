@@ -1,0 +1,107 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Default Title"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Product Query</h1>
+
+        <p:messages id="messages" />
+
+        <h:form prependId="false">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <p:outputLabel value="Product Name" for="@next"/>
+                    <p:autoComplete id="searchValue"
+                                    value="#{currentProductQueryController.searchValue}"
+                                    completeMethod="#{currentProductQueryController.completeSearch}"
+                                    scrollHeight="250"/>
+                </div>
+                <p:commandButton id="searchButton"
+                                 value="Search"
+                                 actionListener="#{currentProductQueryController.onSearch()}"
+                                 update=":messages productsListPanel" />
+                <p:commandButton id="clearButton"
+                                 value="Clear"
+                                 actionListener="#{currentProductQueryController.onClear()}"
+                                 update=":messages productsListPanel productDetailsPanel searchValue" />
+            </div>
+
+            <p:outputPanel id="productsListPanel">
+                <c:if test="#{not empty currentProductQueryController.queryResultList}">
+                    <p:dataTable id="productsTable"
+                                 value="#{currentProductQueryController.queryResultList}"
+                                 var="currentProduct">
+                        <p:column headerText="Product Name" field="productName"></p:column>
+
+                        <p:column headerText="Unit Price">
+                            <h:outputText value="#{currentProduct.unitPrice}">
+                                <f:convertNumber type="currency" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <p:commandLink value="view details"
+                                           actionListener="#{currentProductQueryController.selectProduct(currentProduct)}"
+                                           update=":messages productDetailsPanel" />
+                        </p:column>
+                    </p:dataTable>
+                </c:if>
+            </p:outputPanel>
+
+            <p:outputPanel id="productDetailsPanel">
+
+                <c:if test="#{not empty currentProductQueryController.querySingleResult}">
+
+                    <p:panel header="Product Details">
+                        <p:panelGrid columns="2">
+                            <h:panelGroup>
+                                <strong><h:outputText value="ID"/></strong>
+                            </h:panelGroup>
+                            <h:outputText id="editId" value="#{currentProductQueryController.querySingleResult.productId}"/>
+
+                            <h:panelGroup>
+                                <strong><h:outputText value="productName"/></strong>
+                            </h:panelGroup>
+                            <h:outputText id="productName" value="#{currentProductQueryController.querySingleResult.productName}"/>
+
+                            <h:panelGroup>
+                                <strong><h:outputText value="unitPrice"/></strong>
+                            </h:panelGroup>
+                            <h:outputText id="unitPrice" value="#{currentProductQueryController.querySingleResult.unitPrice}">
+                                <f:convertNumber type="currency" />
+                            </h:outputText>
+
+                            <h:panelGroup>
+                                <strong><h:outputText value="quantityPerUnit"/></strong>
+                            </h:panelGroup>
+                            <h:outputText id="quantityPerUnit" value="#{currentProductQueryController.querySingleResult.quantityPerUnit}"/>
+
+                        </p:panelGrid>
+
+                    </p:panel>
+
+                </c:if>
+
+            </p:outputPanel>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -39,7 +39,6 @@
                     <h:outputText value="#{currentItem.categoryId}"/>
                 </p:column>
 
-                <!-- TODO: add p:column for the properties of the entity to display -->
                 <p:column headerText="categoryName">
                     <h:outputText value="#{currentItem.categoryName}"/>
                 </p:column>
@@ -51,7 +50,7 @@
                 <p:column headerText="picture">
                     <c:if test="#{not empty currentItem.picture}">
                         <o:graphicImage value="#{currentItem.picture}" dataURI="true"/>
-                        <p:graphicImage value="#{currentItem.picture}" />
+                        <p:graphicImage value="#{currentItem.picture}" stream="false"/>
                     </c:if>
                     <c:if test="#{empty currentItem.picture}">
                         No picture

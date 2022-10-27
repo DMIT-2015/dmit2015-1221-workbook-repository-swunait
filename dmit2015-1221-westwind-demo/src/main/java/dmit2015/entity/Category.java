@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Categories", schema = "WestWind", catalog = "DMIT2015_1221_A01_swuUser2015")
+@Table(name = "Categories", schema = "WestWind")
 public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,6 +18,7 @@ public class Category implements Serializable {
     private String categoryName;
     @Basic
     @Column(name = "Description", nullable = true, length = -1)
+    @Lob
     private String description;
     @Basic
     @Column(name = "Picture", nullable = true)
