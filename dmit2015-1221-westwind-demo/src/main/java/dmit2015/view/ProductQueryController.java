@@ -39,7 +39,13 @@ public class ProductQueryController implements Serializable {
 
     public void onSearch() {
         queryResultList = _productRepository.findByProductNameByPattern(searchValue);
-        Messages.addGlobalInfo("Query returned {0} result(s).", queryResultList.size());
+        if (queryResultList.size() > 0) {
+            Messages.addGlobalInfo("Query returned {0} result(s).", queryResultList.size());
+        } else {
+            Messages.addGlobalInfo("No returned for {0}", searchValue);
+            queryResultList = null;
+            querySingleResult = null;
+        }
     }
 
     public void selectProduct(Product selectedProduct) {
