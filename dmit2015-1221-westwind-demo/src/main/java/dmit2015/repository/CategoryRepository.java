@@ -19,7 +19,7 @@ public class CategoryRepository extends AbstractJpaRepository<Category, Integer>
     public List<String> findNamesByPattern(String namePattern) {
         return getEntityManager()
                 .createQuery("""
-                SELECT c
+                SELECT c.categoryName
                 FROM Category c
                 WHERE c.categoryName LIKE :nameValue
                 ORDER BY c.categoryName""", String.class)

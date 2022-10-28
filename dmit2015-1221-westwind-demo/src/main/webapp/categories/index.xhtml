@@ -48,13 +48,13 @@
                 </p:column>
 
                 <p:column headerText="picture">
-                    <c:if test="#{not empty currentItem.picture}">
-                        <o:graphicImage value="#{currentItem.picture}" dataURI="true"/>
-                        <p:graphicImage value="#{currentItem.picture}" stream="false"/>
-                    </c:if>
-                    <c:if test="#{empty currentItem.picture}">
-                        No picture
-                    </c:if>
+                    <o:graphicImage value="#{currentItem.picture}"
+                                    dataURI="true"
+                                    rendered="#{currentItem.picture != null}"
+                    />
+                    <p:graphicImage value="#{currentItem.picture}"
+                                    stream="false"
+                                    rendered="#{currentItem.picture != null}"/>
                 </p:column>
 
                 <p:column headerText="Action">

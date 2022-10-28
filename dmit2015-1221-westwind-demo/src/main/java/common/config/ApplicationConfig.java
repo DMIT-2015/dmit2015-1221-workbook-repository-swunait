@@ -25,9 +25,9 @@ import jakarta.faces.annotation.FacesConfig;
 	@DataSourceDefinition(
 		name="java:app/datasources/RemoteMssqlDMIT2015DS",
 		className="com.microsoft.sqlserver.jdbc.SQLServerDataSource",
-		url="jdbc:sqlserver://localhost;databaseName=DMIT2015_1221_CourseDB;TrustServerCertificate=true",
-		user="user2015",
-		password="Password2015"),
+		url="jdbc:sqlserver://DMIT-Capstone1.ad.sast.ca;databaseName=DMIT2015_1221_A01_swuUser2015;TrustServerCertificate=true",
+		user="swuUser2015",
+		password="RemotePassword.200012345"),
 
 
 //	@DataSourceDefinition(
