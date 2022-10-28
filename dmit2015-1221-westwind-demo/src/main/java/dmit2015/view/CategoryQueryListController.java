@@ -12,6 +12,7 @@ import org.omnifaces.util.Messages;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Named("currentCategoryQueryListController")
 @ViewScoped
@@ -52,9 +53,15 @@ public class CategoryQueryListController implements Serializable {
 
             // The code above was a temporary workaround the issue where we didn't have the time to code a method in the respository to return the required data
 
-            querySingleResult = _categoryRepository.findByName(querySearchValue).orElseThrow();
+            Optional<Category> optionalQuerySingleResult = _categoryRepository.findByName(querySearchValue);
+            if (optionalQuerySingleResult.isPresent()) {
+                querySingleResult = optionalQuerySingleResult.orElseThrow();
+            } else {
+                Messages.addGlobalError("There are no result matching {0}", querySearchValue);
+            }
+
         } catch(Exception ex) {
-            Messages.addGlobalError("There are no result matching {0}", querySearchValue);
+            Messages.addGlobalError("Error performing searching with message: {0}", ex.getMessage());
         }
     }
 
