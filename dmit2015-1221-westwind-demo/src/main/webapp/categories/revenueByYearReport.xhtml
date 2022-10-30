@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:faces="jakarta.faces"
+				xmlns:ui="jakarta.faces.facelets"
+				xmlns:f="jakarta.faces.core"
+				xmlns:h="jakarta.faces.html"
+				xmlns:pt="jakarta.faces.passthrough"
+				xmlns:cc="jakarta.faces.composite"
+				xmlns:my="jakarta.faces.component"
+				xmlns:c="jakarta.tags.core"
+				xmlns:fn="jakarta.tags.functions"
+				xmlns:o="http://omnifaces.org/ui"
+				xmlns:of="http://omnifaces.org/functions"
+				xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/faces-templates/layout.xhtml"
+>
+	<ui:param name="title" value="Category Revenue by Year Report" />
+	
+	<ui:define name="maincontent">
+		<h1>Category Revenue Report</h1>
+
+		<p:messages id="messages" />
+
+		<h:form prependId="false">
+			<div class="ui-fluid">
+				<div class="field">
+					<p:outputLabel for="@next" value="Category"/>
+					<p:selectOneMenu id="categoryId"
+									 value="#{currentCategoryRevenueReportController.selectedCategoryId}">
+						<f:selectItems value="#{currentCategoryRevenueReportController.categorySelectItemMap}" />
+					</p:selectOneMenu>
+				</div>
+				<div class="field">
+					<p:outputLabel for="@next" value="Year"/>
+					<p:selectOneRadio  id="year"
+						value="#{currentCategoryRevenueReportController.selectedSalesYear}">
+						<f:selectItems value="#{currentCategoryRevenueReportController.orderYears}"
+							var="year"
+							itemValue="#{year}"
+							itemLabel="#{year}" />
+					</p:selectOneRadio>
+
+				</div>
+				<div class="field">
+					<p:commandButton id="searchButton"
+								 value="Create Report"
+								 actionListener="#{currentCategoryRevenueReportController.onCreateReport()}"
+								 update="outputPanel" />
+				</div>
+			</div>
+
+			<p:outputPanel id="outputPanel">
+
+				<c:if test="#{not empty currentCategoryRevenueReportController.currentLineChartModel}" >
+					<div class="card">
+						<p:lineChart model="#{currentCategoryRevenueReportController.currentLineChartModel}"
+									style="width: 100%; height: 500px;"/>
+					</div>
+				</c:if>
+				<c:if test="#{empty currentCategoryRevenueReportController.currentLineChartModel}" >
+					There is no data in the line chart model.
+				</c:if>
+
+			</p:outputPanel>		
+		
+		</h:form>
+
+	</ui:define>	
+</ui:composition>

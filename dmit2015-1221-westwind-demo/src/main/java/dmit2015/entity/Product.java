@@ -2,17 +2,21 @@ package dmit2015.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Products", schema = "WestWind")
 public class Product implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ProductID", nullable = false)
-    private Integer productId;
+    private Integer id;
     @Basic
     @Column(name = "ProductName", nullable = false, length = 40)
     private String productName;
@@ -37,13 +41,23 @@ public class Product implements Serializable {
     @Basic
     @Column(name = "Discontinued", nullable = false)
     private Boolean discontinued;
+    @OneToMany(mappedBy = "productsByProductId")
+    private Collection<ManifestItem> manifestItemsByProductId;
+    @OneToMany(mappedBy = "productsByProductId")
+    private Collection<OrderDetail> orderDetailsByProductId;
+    @ManyToOne
+    @JoinColumn(name = "SupplierID", referencedColumnName = "SupplierID", nullable = false, insertable = false, updatable = false)
+    private Supplier suppliersBySupplierId;
+    @ManyToOne
+    @JoinColumn(name = "CategoryID", referencedColumnName = "CategoryID", nullable = false, insertable = false, updatable = false)
+    private Category categoriesByCategoryId;
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getProductName() {
@@ -115,11 +129,43 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productId, product.productId) && Objects.equals(productName, product.productName) && Objects.equals(supplierId, product.supplierId) && Objects.equals(categoryId, product.categoryId) && Objects.equals(quantityPerUnit, product.quantityPerUnit) && Objects.equals(minimumOrderQuantity, product.minimumOrderQuantity) && Objects.equals(unitPrice, product.unitPrice) && Objects.equals(unitsOnOrder, product.unitsOnOrder) && Objects.equals(discontinued, product.discontinued);
+        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(supplierId, product.supplierId) && Objects.equals(categoryId, product.categoryId) && Objects.equals(quantityPerUnit, product.quantityPerUnit) && Objects.equals(minimumOrderQuantity, product.minimumOrderQuantity) && Objects.equals(unitPrice, product.unitPrice) && Objects.equals(unitsOnOrder, product.unitsOnOrder) && Objects.equals(discontinued, product.discontinued);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productName, supplierId, categoryId, quantityPerUnit, minimumOrderQuantity, unitPrice, unitsOnOrder, discontinued);
+        return Objects.hash(id, productName, supplierId, categoryId, quantityPerUnit, minimumOrderQuantity, unitPrice, unitsOnOrder, discontinued);
+    }
+
+    public Collection<ManifestItem> getManifestItemsByProductId() {
+        return manifestItemsByProductId;
+    }
+
+    public void setManifestItemsByProductId(Collection<ManifestItem> manifestItemsByProductId) {
+        this.manifestItemsByProductId = manifestItemsByProductId;
+    }
+
+    public Collection<OrderDetail> getOrderDetailsByProductId() {
+        return orderDetailsByProductId;
+    }
+
+    public void setOrderDetailsByProductId(Collection<OrderDetail> orderDetailsByProductId) {
+        this.orderDetailsByProductId = orderDetailsByProductId;
+    }
+
+    public Supplier getSuppliersBySupplierId() {
+        return suppliersBySupplierId;
+    }
+
+    public void setSuppliersBySupplierId(Supplier suppliersBySupplierId) {
+        this.suppliersBySupplierId = suppliersBySupplierId;
+    }
+
+    public Category getCategoriesByCategoryId() {
+        return categoriesByCategoryId;
+    }
+
+    public void setCategoriesByCategoryId(Category categoriesByCategoryId) {
+        this.categoriesByCategoryId = categoriesByCategoryId;
     }
 }
