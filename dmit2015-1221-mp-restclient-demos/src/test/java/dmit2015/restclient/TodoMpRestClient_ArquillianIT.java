@@ -46,7 +46,7 @@ public class TodoMpRestClient_ArquillianIT { // The class must be declared as pu
                 .addAsLibraries(pomFile.resolve("org.codehaus.plexus:plexus-utils:3.4.2").withTransitivity().asFile())
                 .addClasses(Todo.class, TodoMpRestClient.class)
 //                .addAsManifestResource(new File("src/main/resources/META-INF/microprofile-config.properties"))
-                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"));
+                 .addAsWebInfResource(new File("src/main/resources/META-INF/beans.xml"));
     }
 
     @Inject
@@ -75,9 +75,11 @@ public class TodoMpRestClient_ArquillianIT { // The class must be declared as pu
     @Order(2)
     @Test
     void shouldCreate() {
-        // Arrange
+        // Arrange - you MUST assign values for ALL properties of the document
         Todo newTodo = new Todo();
         newTodo.setTask("Write Integration Test for MP REST Client");
+        newTodo.setCompleted(false);
+        newTodo.setImportant(true);
 
         JsonObject responseObject = _todoMpRestClient.create(newTodo);
         editKey = responseObject.getString("name");
@@ -94,8 +96,9 @@ public class TodoMpRestClient_ArquillianIT { // The class must be declared as pu
         // Assert
         assertNotNull(existingTodo);
         assertEquals("Write Integration Test for MP REST Client", existingTodo.getTask());
+        System.out.println(existingTodo.toString());
         assertFalse(existingTodo.getCompleted());
-        assertFalse(existingTodo.getImportant());
+        assertTrue(existingTodo.getImportant());
     }
 
     @Order(4)
