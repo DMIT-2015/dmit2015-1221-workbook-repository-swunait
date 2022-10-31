@@ -1,0 +1,47 @@
+
+### Create a new document
+POST https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo.json
+Content-Type: application/json
+
+{
+  "task": "Drink Coffee",
+  "important": true,
+  "completed": false
+}
+
+### Create another new document
+POST https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo.json
+Content-Type: application/json
+
+{
+  "task": "Buy Coffee",
+  "important": true,
+  "completed": true
+}
+
+### GET All documents
+GET https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo.json
+
+### GET One document by key
+GET https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiW4YtM6wuWZq9tIkj.json
+
+### UPDATE document - will replace all properties with the properties in the request body - if you miss a property it will be removed
+PUT https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiW4YtM6wuWZq9tIkj.json
+Content-Type: application/json
+
+{
+  "task": "Drink Coffee",
+  "important": true,
+  "completed": true
+}
+### DELETE document - use this if you want to delete a document
+DELETE https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiW4YtM6wuWZq9tIkj.json
+
+
+### PATCH document - use this if you want to update some of the properties but not all of them
+PATCH https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiYCJgry4FqC6cqJNi.json
+Content-Type: application/json
+
+{
+  "completed": true
+}
