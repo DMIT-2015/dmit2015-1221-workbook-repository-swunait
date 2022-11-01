@@ -38,21 +38,16 @@ import java.util.LinkedHashMap;
  */
 @RegisterRestClient(baseUri = "https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com")
 public interface TodoMpRestClient {
-
     final String DOCUMENT_URL = "/Todo";
-
     @POST
     @Path(DOCUMENT_URL + ".json")
     JsonObject create(Todo newTodo);
-
     @GET
     @Path(DOCUMENT_URL + ".json")
     LinkedHashMap<String, Todo> findAll();
-
     @GET
     @Path(DOCUMENT_URL + "/{key}.json")
     Todo findByKey(@PathParam("key") String key);
-
     @PUT
     @Path(DOCUMENT_URL + "/{key}.json")
     Todo update(@PathParam("key") String key, Todo updatedTodo);

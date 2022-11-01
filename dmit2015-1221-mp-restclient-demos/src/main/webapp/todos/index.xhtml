@@ -23,6 +23,10 @@
 
         <p:messages id="messages"/>
 
+        <c:if test="#{not empty currentTodoListController.feedbackMessage}">
+            <h:outputText value="#{currentTodoListController.feedbackMessage}" />
+        </c:if>
+
         <h:form>
 
             <p:commandButton

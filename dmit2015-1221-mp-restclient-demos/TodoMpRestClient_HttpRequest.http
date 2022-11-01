@@ -23,10 +23,10 @@ Content-Type: application/json
 GET https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo.json
 
 ### GET One document by key
-GET https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiW4YtM6wuWZq9tIkj.json
+GET https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFnzuLN8xO3q3ReB2Nv.json
 
 ### UPDATE document - will replace all properties with the properties in the request body - if you miss a property it will be removed
-PUT https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFiW4YtM6wuWZq9tIkj.json
+PUT https://dmit2015-1221-a01-swu-demos-default-rtdb.firebaseio.com/Todo/-NFnzuLN8xO3q3ReB2Nv.json
 Content-Type: application/json
 
 {
