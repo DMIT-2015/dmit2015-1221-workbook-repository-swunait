@@ -30,37 +30,13 @@ public class TodoListController implements Serializable {
     @RestClient
     private TodoMpRestClient _todoMpRestClient;
 
-    @Inject
-    @RestClient
-    private OpenWeatherMapMpRestClient _openWeatherMapRestClient;
-
-    @Inject
-    @ConfigProperty(name = "OPENWEATHERMAP_APPID")
-    @Getter @Setter
-    private String openweathermapAppId;
-
-    @Inject
-    @ConfigProperty(name = "openweathermap.units")
-    @Getter @Setter
-    private String openweathermapUnits;
-
     @Getter
     private Map<String, Todo> todoMap;
-
-    @Getter
-    private String feedbackMessage;
 
     @PostConstruct  // After @Inject is complete
     public void init() {
         try {
             todoMap = _todoMpRestClient.findAll();
-
-            OpenWeatherApi apiResponse = _openWeatherMapRestClient.findWeatherForCity(
-                    "Edmonton",openweathermapAppId,openweathermapUnits);
-            String message = String.format("The current weather in Edmonton is %s", apiResponse.getMain().getTemp());
-            System.out.println(message);
-            //Messages.addGlobalInfo(message);
-            feedbackMessage = message;
         } catch (Exception ex) {
             Messages.addGlobalError(ex.getMessage());
         }

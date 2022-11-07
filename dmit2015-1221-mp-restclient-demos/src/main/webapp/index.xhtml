@@ -20,6 +20,28 @@
     <ui:define name="maincontent">
         <h1>MP REST Client Demo</h1>
 
+        <p:messages id="messages" />
+
+        <h:form prependId="false">
+            <div class="ui-fluid">
+                <div class="field">
+                    <p:outputLabel for="@next">City:</p:outputLabel>
+                    <p:inputText
+                            id="city"
+                            type="text"
+                            value="#{currentOpenWeatherMapMpClientController.city}">
+                    </p:inputText>
+                </div>
+                <div class="field">
+                    <p:commandButton id="getWeatherButton"
+                                     value="Get Weather"
+                                     actionListener="#{currentOpenWeatherMapMpClientController.onGetWeather()}"
+                                     update=":messages" />
+                </div>
+            </div>
+
+        </h:form>
+
     </ui:define>
 
 </ui:composition>
