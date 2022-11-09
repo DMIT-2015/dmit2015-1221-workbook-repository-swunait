@@ -2,7 +2,9 @@ package dmit2015.resource;
 
 import common.config.ApplicationConfig;
 import common.config.JAXRSConfiguration;
+import common.jpa.AbstractJpaRepository;
 import dmit2015.entity.TodoItem;
+import dmit2015.listener.TodoItemApplicationStartupListener;
 import dmit2015.repository.TodoItemRepository;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -60,13 +62,12 @@ public class TodoItemResourceArquillianRestAssuredIT {
 //                .addAsLibraries(pomFile.resolve("com.microsoft.sqlserver:mssql-jdbc:11.2.1.jre17").withTransitivity().asFile())
 //                .addAsLibraries(pomFile.resolve("com.oracle.database.jdbc:ojdbc11:21.7.0.0").withTransitivity().asFile())
                 .addClasses(ApplicationConfig.class, JAXRSConfiguration.class)
-                .addClasses(TodoItem.class, TodoItemRepository.class, TodoItemResource.class)
+                .addClasses(TodoItem.class, AbstractJpaRepository.class, TodoItemRepository.class, TodoItemResource.class, TodoItemApplicationStartupListener.class)
                 .addPackage("common.jpa")
                 .addPackage("common.validator")
 //                .addPackage("dmit2015.repository")
 //                .addPackage("dmit2015.resource")
                 .addAsResource("META-INF/persistence.xml")
-                .addAsResource("META-INF/sql/import-data.sql")
 //                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addAsManifestResource(new File("src/main/resources/META-INF/beans.xml"));
     }
@@ -101,11 +102,11 @@ public class TodoItemResourceArquillianRestAssuredIT {
 
         assertEquals(3, todos.size());
         TodoItem firstTodoItem = todos.get(0);
-        assertEquals("Todo 1", firstTodoItem.getName());
-        assertFalse(firstTodoItem.isComplete());
+        assertEquals("Create JAX-RS demo project", firstTodoItem.getName());
+        assertTrue(firstTodoItem.isComplete());
 
         TodoItem lastTodoItem = todos.get(todos.size() - 1);
-        assertEquals("Todo 3", lastTodoItem.getName());
+        assertEquals("Create DTO version of TodoResource", lastTodoItem.getName());
         assertFalse(lastTodoItem.isComplete());
 
     }
@@ -170,9 +171,12 @@ public class TodoItemResourceArquillianRestAssuredIT {
         existingTodoItem.setName("Updated Name");
         existingTodoItem.setComplete(true);
 
+        Jsonb jsonb = JsonbBuilder.create();
+        String jsonTodoItem = jsonb.toJson(existingTodoItem);
+
         Response putResponse = given()
                 .contentType(ContentType.JSON)
-                .body(existingTodoItem)
+                .body(jsonTodoItem)
                 .when()
                 .put(testDataResourceLocation)
                 .then()
@@ -181,7 +185,6 @@ public class TodoItemResourceArquillianRestAssuredIT {
                 .response();
 
         String jsonBody = putResponse.getBody().asString();
-        Jsonb jsonb = JsonbBuilder.create();
         TodoItem updatedTodoItem = jsonb.fromJson(jsonBody, TodoItem.class);
         assertEquals(existingTodoItem.getName(), updatedTodoItem.getName());
         assertEquals(existingTodoItem.isComplete(), updatedTodoItem.isComplete());

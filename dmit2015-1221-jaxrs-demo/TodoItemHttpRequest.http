@@ -9,7 +9,7 @@ POST http://localhost:8080/restapi/TodoItems
 Content-Type: application/json
 
 {
-  "name": "Start DMIT2015 Assignment 3",
+  "name": "Start DMIT2015 Assignment 6",
   "complete": false
 }
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "id": 4,
-  "name": "Commit DMIT2015 Assignment 3",
+  "name": "Commit and push DMIT2015 Assignment 6",
   "complete": true,
   "version": 0
 }

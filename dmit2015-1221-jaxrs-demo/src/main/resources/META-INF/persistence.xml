@@ -13,7 +13,6 @@
 
             <!-- database.action: drop-and-create, create, update, none -->
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/import-data.sql" />
 
         </properties>
     </persistence-unit>
@@ -26,7 +25,6 @@
     <!--        <properties>-->
     <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>-->
     <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
-    <!--            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/import-data.sql"/>-->
     <!--        </properties>-->
     <!--    </persistence-unit>-->
 
@@ -37,7 +35,6 @@
     <!--        <properties>-->
     <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>-->
     <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
-    <!--            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/import-data.sql"/>-->
     <!--        </properties>-->
     <!--    </persistence-unit>-->
 

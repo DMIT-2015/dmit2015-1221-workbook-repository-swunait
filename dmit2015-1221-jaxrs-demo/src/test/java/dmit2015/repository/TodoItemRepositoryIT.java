@@ -4,6 +4,7 @@ import common.config.ApplicationConfig;
 
 import common.jpa.AbstractJpaRepository;
 import dmit2015.entity.TodoItem;
+import dmit2015.listener.TodoItemApplicationStartupListener;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -42,9 +43,8 @@ public class TodoItemRepositoryIT {
 //                .addAsLibraries(pomFile.resolve("com.microsoft.sqlserver:mssql-jdbc:10.2.1.jre17").withTransitivity().asFile())
                 .addAsLibraries(pomFile.resolve("org.hamcrest:hamcrest:2.2").withTransitivity().asFile())
                 .addClass(ApplicationConfig.class)
-                .addClasses(TodoItem.class, TodoItemRepository.class, AbstractJpaRepository.class)
+                .addClasses(TodoItem.class, TodoItemRepository.class, AbstractJpaRepository.class, TodoItemApplicationStartupListener.class)
                 .addAsResource("META-INF/persistence.xml")
-                .addAsResource("META-INF/sql/import-data.sql")
                 .addAsWebInfResource(EmptyAsset.INSTANCE,"beans.xml");
     }
 
@@ -85,11 +85,11 @@ public class TodoItemRepositoryIT {
         assertEquals(3, queryResultList.size());
 
         TodoItem firstTodoItem = queryResultList.get(0);
-        assertEquals("Todo 1", firstTodoItem.getName());
-        assertEquals(false, firstTodoItem.isComplete());
+        assertEquals("Create JAX-RS demo project", firstTodoItem.getName());
+        assertEquals(true, firstTodoItem.isComplete());
 
         TodoItem lastTodoItem = queryResultList.get(queryResultList.size() - 1);
-        assertEquals("Todo 3", lastTodoItem.getName());
+        assertEquals("Create DTO version of TodoResource", lastTodoItem.getName());
         assertEquals(false, lastTodoItem.isComplete());
     }
 

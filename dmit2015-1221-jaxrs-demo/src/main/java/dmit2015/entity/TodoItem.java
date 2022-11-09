@@ -1,5 +1,7 @@
 package dmit2015.entity;
 
+import dmit2015.dto.TodoItemDto;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +10,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -27,11 +30,28 @@ public class TodoItem implements Serializable {
     @Version
     private Integer version;
 
-//    public TodoItem(Long id, String name, boolean complete) {
-//        this.id = id;
-//        this.name = name;
-//        this.complete = complete;
-//    }
+//    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss")
+    @Column(nullable = false)
+    private LocalDateTime createTime;
+
+//    @JsonbDateFormat(value = "yyyy-MM-dd'T':mm:ss")
+    private LocalDateTime updateTime;
+
+    @PrePersist
+    private void beforePersist() {
+        createTime = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void beforeUpdate() {
+        updateTime = LocalDateTime.now();
+    }
+
+    public TodoItem(Long id, String name, boolean complete) {
+        this.id = id;
+        this.name = name;
+        this.complete = complete;
+    }
 
 }
 

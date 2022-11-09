@@ -1,4 +1,5 @@
 package dmit2015.resource;
+
 import dmit2015.entity.TodoItem;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -45,11 +46,11 @@ class TodoItemResourceRestAssuredIT {
 
         assertEquals(3, todos.size());
         TodoItem firstTodoItem = todos.get(0);
-        assertEquals("Todo 1", firstTodoItem.getName());
-        assertFalse(firstTodoItem.isComplete());
+        assertEquals("Create JAX-RS demo project", firstTodoItem.getName());
+        assertTrue(firstTodoItem.isComplete());
 
         TodoItem lastTodoItem = todos.get(todos.size() - 1);
-        assertEquals("Todo 3", lastTodoItem.getName());
+        assertEquals("Create DTO version of TodoResource", lastTodoItem.getName());
         assertFalse(lastTodoItem.isComplete());
 
     }
@@ -111,9 +112,12 @@ class TodoItemResourceRestAssuredIT {
         existingTodoItem.setName("Updated Name");
         existingTodoItem.setComplete(true);
 
+        Jsonb jsonb = JsonbBuilder.create();
+        String jsonTodoItem = jsonb.toJson(existingTodoItem);
+
         Response putResponse = given()
                 .contentType(ContentType.JSON)
-                .body(existingTodoItem)
+                .body(jsonTodoItem)
                 .when()
                 .put(testDataResourceLocation)
                 .then()
@@ -122,7 +126,6 @@ class TodoItemResourceRestAssuredIT {
                 .response();
 
         String jsonBody = putResponse.getBody().asString();
-        Jsonb jsonb = JsonbBuilder.create();
         TodoItem updatedTodoItem = jsonb.fromJson(jsonBody, TodoItem.class);
         assertEquals(existingTodoItem.getName(), updatedTodoItem.getName());
         assertEquals(existingTodoItem.isComplete(), updatedTodoItem.isComplete());
