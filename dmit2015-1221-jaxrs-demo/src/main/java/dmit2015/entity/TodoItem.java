@@ -1,7 +1,5 @@
 package dmit2015.entity;
 
-import dmit2015.dto.TodoItemDto;
-import jakarta.json.bind.annotation.JsonbDateFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,11 +28,9 @@ public class TodoItem implements Serializable {
     @Version
     private Integer version;
 
-//    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime createTime;
 
-//    @JsonbDateFormat(value = "yyyy-MM-dd'T':mm:ss")
     private LocalDateTime updateTime;
 
     @PrePersist
