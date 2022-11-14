@@ -99,7 +99,7 @@ public class TodoItemResource {
 
         // userInfo is injected via @Context parameter to this method
         URI location = uriInfo.getAbsolutePathBuilder()
-                .path(newTodoItem.getId() + "")
+                .path( String.valueOf(newTodoItem.getId()) )
                 .build();
 
         // Set the location path of the new entity with its identifier

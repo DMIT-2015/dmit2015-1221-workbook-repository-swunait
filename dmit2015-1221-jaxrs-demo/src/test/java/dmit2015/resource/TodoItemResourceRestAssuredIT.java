@@ -62,13 +62,13 @@ class TodoItemResourceRestAssuredIT {
         newTodoItem.setName("Create REST Assured Integration Test");
         newTodoItem.setComplete(false);
 
-        // Jsonb jsonb = JsonbBuilder.create();
-        // String jsonBody = jsonb.toJson(newTodoItem);
+         Jsonb jsonb = JsonbBuilder.create();
+         String jsonBody = jsonb.toJson(newTodoItem);
 
         Response response = given()
                 .contentType(ContentType.JSON)
-                // .body(jsonBody)
-                .body(newTodoItem)
+                 .body(jsonBody)
+//                .body(newTodoItem)
                 .when()
                 .post(todoResourceUrl)
                 .then()
