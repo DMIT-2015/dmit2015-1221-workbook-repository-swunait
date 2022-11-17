@@ -21,7 +21,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
-            <version>9.1.0</version>
+            <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -206,21 +206,24 @@
                 <version>3.3.2</version>
             </plugin>
 
-            <!-- Plugin to build a bootable JAR for WildFly -->
             <plugin>
                 <!-- https://docs.wildfly.org/bootablejar/#wildfly_jar_dev_mode -->
                 <!-- mvn wildfly-jar:dev-watch -->
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-jar-maven-plugin</artifactId>
-                <version>8.0.0.Final</version>
+                <version>8.1.0.Final</version>
                 <configuration>
-                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#27.0.0.Beta1</feature-pack-location>
-                    <!--                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)</feature-pack-location>-->
+                    <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#27.0.0.Final</feature-pack-location>
                     <layers>
-                        <!-- https://docs.wildfly.org/26/Bootable_Guide.html#wildfly_layers -->
-                        <layer>jpa</layer>
+                        <!-- https://docs.wildfly.org/27/Bootable_Guide.html#wildfly_layers -->
+                        <layer>jaxrs-server</layer>
+                        <layer>management</layer>
+                        <layer>microprofile-platform</layer>
                         <layer>jsf</layer>
-                        <layer>h2-driver</layer>
+                        <!-- TODO: add layer for ee-security and undertow-https -->
+                        <layer>ee-security</layer>
+                        <layer>undertow-https</layer>
+
                     </layers>
                     <excluded-layers>
                         <layer>deployment-scanner</layer>
@@ -228,6 +231,15 @@
                     <plugin-options>
                         <jboss-fork-embedded>true</jboss-fork-embedded>
                     </plugin-options>
+                    <!-- TODO: add cli-sessions to run script file to enable EE security-->
+                    <cli-sessions>
+                        <cli-session>
+                            <script-files>
+                                <script>/home/user2015/jdk/server/wildfly-scripts/configure-elytron.cli</script>
+                            </script-files>
+                        </cli-session>
+                    </cli-sessions>
+
                     <!-- https://docs.wildfly.org/bootablejar/#wildfly_jar_enabling_debug -->
                     <jvmArguments>
                         <!-- https://www.jetbrains.com/help/idea/attaching-to-local-process.html#attach-to-local -->
@@ -237,6 +249,7 @@
                         -->
                         <arg>-agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n</arg>
                     </jvmArguments>
+                    <timeout>120</timeout>
                 </configuration>
                 <executions>
                     <execution>
@@ -246,6 +259,7 @@
                     </execution>
                 </executions>
             </plugin>
+
 
             <!-- Plugin to run unit tests-->
             <plugin>

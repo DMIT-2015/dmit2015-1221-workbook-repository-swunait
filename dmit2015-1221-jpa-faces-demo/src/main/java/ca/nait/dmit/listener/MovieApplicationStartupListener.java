@@ -30,7 +30,7 @@ public class MovieApplicationStartupListener implements ServletContextListener {
 
         try {
             Movie movie1 = new Movie();
-//            movie1.setUsername("DAUSTIN");
+            movie1.setUsername("DLEE");
             movie1.setTitle("When Harry Met Sally");
             movie1.setReleaseDate(LocalDate.parse("1989-02-12"));
             movie1.setGenre("Romantic Comedy");
@@ -39,7 +39,7 @@ public class MovieApplicationStartupListener implements ServletContextListener {
             _movieRepository.add(movie1);
 
             Movie movie2 = new Movie();
-//            movie2.setUsername("DAUSTIN");
+            movie2.setUsername("DLEE");
             movie2.setTitle("Ghostbusters");
             movie2.setReleaseDate(LocalDate.parse("1984-03-13"));
             movie2.setGenre("Comedy");
@@ -48,7 +48,7 @@ public class MovieApplicationStartupListener implements ServletContextListener {
             _movieRepository.add(movie2);
 
             Movie movie3 = new Movie();
-//            movie3.setUsername("DAUSTIN");
+            movie3.setUsername("EABEL");
             movie3.setTitle("Ghostbusters 2");
             movie3.setReleaseDate(LocalDate.parse("1986-02-23"));
             movie3.setGenre("Comedy");
@@ -57,7 +57,7 @@ public class MovieApplicationStartupListener implements ServletContextListener {
             _movieRepository.add(movie3);
 
             Movie movie4 = new Movie();
-//            movie4.setUsername("DAUSTIN");
+            movie4.setUsername("JKING");
             movie4.setTitle("Rio Bravo");
             movie4.setReleaseDate(LocalDate.parse("1959-04-15"));
             movie4.setGenre("Western");
