@@ -60,8 +60,8 @@ public class Login implements Serializable {
 
         switch (continueAuthentication()) {
             case SEND_CONTINUE:
-//                Faces.responseComplete();
-                _facesContext.responseComplete();
+                Faces.responseComplete();
+//                _facesContext.responseComplete();
                 Faces.redirect(Faces.getRequestContextPath() + "/index.xhtml");        // added for Caller-Initiated Authentication
                 break;
             case SEND_FAILURE:

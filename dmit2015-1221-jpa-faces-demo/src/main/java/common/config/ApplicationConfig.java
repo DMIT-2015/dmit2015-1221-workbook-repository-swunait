@@ -30,8 +30,8 @@ import jakarta.security.enterprise.identitystore.LdapIdentityStoreDefinition;
         @DataSourceDefinition(
                 name = "java:app/datasources/h2databaseDS",
                 className = "org.h2.jdbcx.JdbcDataSource",
-                // url="jdbc:h2:file:~/jdk/databases/h2/DMIT2015_1213_CourseDB;MODE=LEGACY;",
-                url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=LEGACY;",
+                url="jdbc:h2:file:~/jdk/databases/h2/DMIT2015_1221_CourseDB;MODE=LEGACY;",
+//                url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=LEGACY;",
                 user = "user2015",
                 password = "Password2015"),
 

@@ -1,8 +1,11 @@
 package dmit2015.repository;
 
 import dmit2015.entity.Movie;
+import dmit2015.security.AnonymousUserSecurityInterceptor;
+import dmit2015.security.MovieSecurityInterceptor;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptors;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.security.enterprise.SecurityContext;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
+@Interceptors({MovieSecurityInterceptor.class, AnonymousUserSecurityInterceptor.class})
 public class MovieRepository {
 
     @Inject

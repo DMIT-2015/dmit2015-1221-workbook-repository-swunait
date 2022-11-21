@@ -33,9 +33,9 @@
           <element id="library" level="project" name="Maven: com.h2database:h2:2.1.214" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.3" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:2.0.3" />
-          <element id="library" level="project" name="Maven: org.primefaces:primefaces:jakarta:12.0.0-RC3" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:jakarta:12.0.0" />
           <element id="library" level="project" name="Maven: org.webjars.npm:primeflex:3.2.1" />
-          <element id="library" level="project" name="Maven: org.omnifaces:omnifaces:4.0-M17" />
+          <element id="library" level="project" name="Maven: org.omnifaces:omnifaces:4.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-java:4.4.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-api:4.4.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-chrome-driver:4.4.0" />
