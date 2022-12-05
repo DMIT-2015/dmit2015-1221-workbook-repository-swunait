@@ -3,6 +3,7 @@ package dmit2015.resource;
 import dmit2015.dto.TodoItemDto;
 import dmit2015.entity.TodoItem;
 import dmit2015.repository.TodoItemRepository;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.json.*;
@@ -16,6 +17,8 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import java.net.URI;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,12 +67,15 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)	// All methods returns data that has been converted to JSON format
 public class TodoItemDtoResource {
 
+    @Inject
+    private JsonWebToken _callerPrincipal;
     @Context
     private UriInfo uriInfo;
 
     @Inject
     private TodoItemRepository todoItemRepository;
 
+    @RolesAllowed({"Sales","IT"})
     @POST   // POST: restapi/TodoItemsDto
     public Response postTodoItem(@Valid TodoItemDto dto) {
         if (dto == null) {
@@ -129,6 +135,7 @@ public class TodoItemDtoResource {
         return Response.ok(dto).build();
     }
 
+    @RolesAllowed({"IT"})
     @DELETE // DELETE: restapi/TodoItemsDto/5
     @Path("{id}")
     public Response deleteTodoItem(@PathParam("id") Long id) {

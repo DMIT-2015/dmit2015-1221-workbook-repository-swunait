@@ -130,6 +130,28 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.25.6</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.microprofile/microprofile -->
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>5.0</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.directory.api</groupId>
+            <artifactId>api-all</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -165,13 +187,21 @@
                 <configuration>
                     <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#27.0.0.Final</feature-pack-location>
                     <layers>
-                        <!-- https://docs.wildfly.org/26/Bootable_Guide.html#wildfly_layers -->
+                        <!-- https://docs.wildfly.org/27/Bootable_Guide.html#wildfly_layers -->
                         <layer>jaxrs-server</layer>
                         <layer>management</layer>
-                        <layer>microprofile-config</layer>
-                        <layer>microprofile-rest-client</layer>
+                        <layer>microprofile-platform</layer>
                         <layer>jsf</layer>
+                        <layer>ee-security</layer>
+                        <layer>undertow-https</layer>
                     </layers>
+<!--                    <cli-sessions>-->
+<!--                        <cli-session>-->
+<!--                            <script-files>-->
+<!--                                <script>/home/user2015/jdk/server/wildfly-scripts/configure-elytron.cli</script>-->
+<!--                            </script-files>-->
+<!--                        </cli-session>-->
+<!--                    </cli-sessions>-->
                     <excluded-layers>
                         <layer>deployment-scanner</layer>
                     </excluded-layers>

@@ -1,0 +1,27 @@
+### The following request should return a Bad Request response
+POST https://localhost:8443/restapi/TodoItems
+Content-Type: application/json
+
+{
+  "name":"Finish DMIT2015 Assignment 1",
+  "complete":false
+}
+
+### GET a JWT Token for user DLEE
+POST https://localhost:8443/restapi/jwt/ldapJsonLogin
+Content-Type:application/json
+
+{
+  "username": "DLEE",
+  "password":"Password2015"
+}
+
+### The following request should return OK
+POST https://localhost:8443/restapi/TodoItems
+Content-Type: application/json
+Authorization: Bearer eyJraWQiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJETEVFIiwidXBuIjoiRExFRSIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJTYWxlcyJdLCJqdGkiOiJlNDA0NGZhNi01OGE4LTQ2NmItOWU3OC0zNzI5YWVkMDlmNjgiLCJpYXQiOjE2NjkzMjQyMTYsImV4cCI6MTY2OTMzODYxNn0.z6ExhS3PdIGpb93YGjkiJgdiMWiRVjoSsioHtfRQlKijCYZ_RFy5aA6vmXm2p1DmqjqqWRKL3d-82wrzwUtjTgZx_hg_7UMdetVFe8Q6w9530bf0cH6dCiiF9M_leEZc9b7lmJFY26Pe0eG9Em5p7IuzBntntmNc5b1FmerXso-UnrMmQlweXnrUhM3zAW9TckcEtz4DdX1x80dCQTljIghuaU54ItEWmpZVcBRXumcnxPXnotFyFZTPXZKczFy3qax1zwAk2x0oKb7CMqWmCXYrbxj6TuHO2JzQasOpeLatMsGvnyoDvlICXfO20nW5VO7aY36Ue4ADG83nPJ5_UA
+
+{
+  "name":"Finish DMIT2015 Assignment 7",
+  "complete":false
+}
